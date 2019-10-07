@@ -29,7 +29,8 @@ const scraper = new Scraper();
 const mySql = new MySql();
 mySql.init();
 
-const sofascore = new App(mySql, scraper);
+const appSofascore = new App(mySql, scraper);
+appSofascore.run();
 
 
 // Routing
