@@ -18,11 +18,9 @@ server.listen(port, () => {
 
 const scraper = new Scraper();
 const mySql = new MySql();
+mySql.init();
 
 const sofascore = new App(mySql, scraper);
-
-
-
 
 
 // Routing

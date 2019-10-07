@@ -1,5 +1,7 @@
 const Const = {
-    mySqlHost: "http:",
+    mySqlHost: "localhost",
+    mySqlUser: "root",
+    mySqlPassword: "",
 
 
     scrapperSofaScoreBaseUrlAPI: "https://www.sofascore.com/",
