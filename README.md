@@ -4,7 +4,9 @@
 - npm install
 - cd src
 - npm install
-- nodemon start ou npm start
+- lancer un serveur mysql en localhost (xampp)
+- créer la base de données "sofascore" en local
+- nodemon start (dev) ou npm start (prod)
 
 Tout ce qu'on code côté server sera dans le dossier server/src.
 

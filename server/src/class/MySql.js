@@ -27,11 +27,13 @@ class MySql {
     }
 
     createDatabaseAndTableIfDoesntExist() {
+        //compte le nombre de table dans la base de données
         const sqlNumberTable = "SELECT COUNT(*) AS nB FROM information_schema.tables WHERE table_schema = '" + this.database + "'";
         this.con.query(sqlNumberTable, (err, result) => {
             if (err) {
                 throw err;
             } else {
+                //si le nombre de table est inférieur à 1 alors on créer toutes les tables
                 if (!result[0].nB >= 1) {
                     const sqls = [
                         "CREATE TABLE `event` ( `id` int(11) NOT NULL, `name` varchar(255) NOT NULL, `json` text NOT NULL ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
@@ -43,9 +45,9 @@ class MySql {
                             if (err) throw err;
                         });
                     });
-                    console.log("All Tables and Datas created successfully!");
+                    console.log("Les tables et les données ont bien été crées");
                 } else {
-                    console.log("All Tables and Datas already created. To have a new database just drop all the tables or truncate the database");
+                    console.log("Les tables et les données sont déjà crées. Pour les mettre à jour faire un drop de toutes les tables ou un truncate de la base de donnée");
                 }
             }
         });
