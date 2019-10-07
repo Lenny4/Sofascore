@@ -1,17 +1,21 @@
 const Const = {
-    mySqlHost: "localhost",
-    mySqlUser: "root",
-    mySqlPassword: "",
-    mySqlDatabase: 'sofascore',
+    mySql: {
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "sofascore",
+    },
 
 
-    scrapperSofaScoreBaseUrlAPI: "https://www.sofascore.com/",
+    scrapper: {
+        baseUrlAPI: "https://www.sofascore.com/",
+    },
 
 
-    appConst: "",
+    appConst: {},
 
 
-    eventConst: "",
+    eventConst: {},
 };
 
 module.exports = Const;

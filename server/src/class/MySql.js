@@ -3,10 +3,10 @@ const mysql = require('mysql');
 
 class MySql {
     constructor() {
-        this.host = Const.mySqlHost;
-        this.user = Const.mySqlUser;
-        this.password = Const.mySqlPassword;
-        this.database = Const.mySqlDatabase;
+        this.host = Const.mySql.host;
+        this.user = Const.mySql.user;
+        this.password = Const.mySql.password;
+        this.database = Const.mySql.database;
         this.con = mysql.createConnection({
             host: this.host,
             user: this.user,
@@ -17,13 +17,7 @@ class MySql {
 
     // https://www.w3schools.com/nodejs/nodejs_mysql.asp
     init() {
-        this.con.connect((err) => {
-            if (err) {
-                throw err;
-            } else {
-                this.createDatabaseAndTableIfDoesntExist();
-            }
-        });
+        this.createDatabaseAndTableIfDoesntExist();
     }
 
     createDatabaseAndTableIfDoesntExist() {
