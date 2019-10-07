@@ -17,10 +17,10 @@ class MySql {
 
     // https://www.w3schools.com/nodejs/nodejs_mysql.asp
     init() {
-        this.createDatabaseAndTableIfDoesntExist();
+        this.createTablesAndDatasIfDoesntExist();
     }
 
-    createDatabaseAndTableIfDoesntExist() {
+    createTablesAndDatasIfDoesntExist() {
         //compte le nombre de table dans la base de données
         const sqlNumberTable = "SELECT COUNT(*) AS nB FROM information_schema.tables WHERE table_schema = '" + this.database + "'";
         this.con.query(sqlNumberTable, (err, result) => {
