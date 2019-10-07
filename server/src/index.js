@@ -6,15 +6,24 @@ const server = require('http').createServer(app);
 const io = require('../')(server);
 const port = process.env.PORT || 3000;
 
-const App = require('./class/App');
-const Scraper = require('./class/Scraper');
-const MySql = require('./class/MySql');
-
-const Const = require('./class/Const');
-
 server.listen(port, () => {
     console.log('Server listening at port %d', port);
 });
+
+/*
+ ================================
+           _____  _____
+     /\   |  __ \|  __ \
+    /  \  | |__) | |__) |
+   / /\ \ |  ___/|  ___/
+  / ____ \| |    | |
+ /_/    \_\_|    |_|
+ ================================
+ */
+
+const App = require('./class/App');
+const Scraper = require('./class/Scraper');
+const MySql = require('./class/MySql');
 
 const scraper = new Scraper();
 const mySql = new MySql();
