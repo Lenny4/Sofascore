@@ -30,9 +30,8 @@ class MySql {
                 //si le nombre de table est inférieur à 1 alors on créer toutes les tables
                 if (!result[0].nB >= 1) {
                     const sqls = [
-                        "CREATE TABLE `event` ( `id` int(11) NOT NULL, `name` varchar(255) NOT NULL, `json` text NOT NULL ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
-                        "ALTER TABLE `event` ADD PRIMARY KEY (`id`);",
-                        "ALTER TABLE `event` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;",
+                        "CREATE TABLE `event`( `id` int(11) NOT NULL, `name` varchar(255) NOT NULL, `sport` varchar(255) NOT NULL, `date` date NOT NULL, `json` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
+                        "ALTER TABLE `event` ADD PRIMARY KEY(`id`)",
                     ];
                     sqls.map((sql) => {
                         this.con.query(sql, (err, result) => {
