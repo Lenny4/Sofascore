@@ -6,16 +6,12 @@ const Const = {
         database: "sofascore",
     },
 
-    scrapper: {
+    scraper: {
         baseUrlAPI: "https://www.sofascore.com",
         sportsSlug: ["football, basket, tennis"],
         endUrlAPI: "json",
         lastDate: "2019-01-01",
     },
-
-    appConst: {},
-
-    eventConst: {},
 };
 
 module.exports = Const;

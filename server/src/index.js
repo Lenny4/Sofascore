@@ -30,7 +30,7 @@ mySql.init();
 
 const scraper = new Scraper(mySql);
 
-const appSofascore = new App(mySql, scraper);
+const appSofascore = new App(scraper);
 appSofascore.run();
 
 

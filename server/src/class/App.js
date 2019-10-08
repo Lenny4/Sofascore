@@ -1,11 +1,10 @@
 class App {
-    constructor(mySql, scraper) {
-        this.mySql = mySql;
+    constructor(scraper) {
         this.scraper = scraper;
     }
 
     run() {
-
+        this.scraper.init();
     }
 }
 
