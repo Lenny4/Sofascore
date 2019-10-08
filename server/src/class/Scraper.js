@@ -2,7 +2,7 @@ const Const = require('./Const');
 const DateManager = require('./DateManager');
 
 class Scraper {
-    constructor() {
+    constructor(mySql) {
         this.sportsSlug = Const.scrapper.sportsSlug;
         this.lastDate = DateManager.stringToDate(Const.scrapper.lastDate);
 
@@ -11,6 +11,8 @@ class Scraper {
         this.today = new Date(now_utc);
 
         this.dateToGetDatas = null;
+
+        this.mySql = mySql;
     }
 
     getUrlForSportAndDate(sportSlug, date) {

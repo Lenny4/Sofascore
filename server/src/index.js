@@ -25,9 +25,10 @@ const App = require('./class/App');
 const Scraper = require('./class/Scraper');
 const MySql = require('./class/MySql');
 
-const scraper = new Scraper();
 const mySql = new MySql();
 mySql.init();
+
+const scraper = new Scraper(mySql);
 
 const appSofascore = new App(mySql, scraper);
 appSofascore.run();
