@@ -48,7 +48,8 @@ class MySql {
     }
 
     saveEventInBdd(event) {
-        //example
+        //c'est fonction est à titre d'exemple
+        // sinon on peut faire une fonction saveEventSInBdd qui elle prend en paramètre un tableau d'event à voir
     }
 }
 
