@@ -26,7 +26,6 @@ class Scraper {
 
     init() {
         // vérifie dans la base de donnée à quelle date on c'est arrêté
-        //on commence par this.lastDate (le début de l'année) et on remonte jusqu'à this.today
         // pour changer la valeur de this.dateToGetDatas
         //puis appelle le run()
         console.log(this.lastDate, this.today, this.dateToGetDatas);
@@ -34,6 +33,8 @@ class Scraper {
 
     run() {
         // la fonction qui va aller récupérer les données en continu, elle s'auto appelle
+
+        //on commence par this.lastDate (le début de l'année) et on remonte jusqu'à this.today
 
         //tous les évènements pour une date donnée doivent être sauvegardé en même temps pour
         // être sûre qu'on n'oublie aucun match lorsque l'on stop le programme
