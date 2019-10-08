@@ -1,8 +1,8 @@
 const Const = {
     mySql: {
-        host: "localhost",
+        host: "51.75.195.80",
         user: "root",
-        password: "",
+        password: "toor",
         database: "sofascore",
     },
 
