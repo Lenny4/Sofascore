@@ -20,6 +20,10 @@ class Scraper {
         return Const.scraper.baseUrlAPI + "/" + sportSlug + "//" + formatedDate + "/" + Const.scraper.endUrlAPI;
     }
 
+    getUrlForEvent(eventId) {
+        return Const.scraper.baseUrlAPI + "/" + eventId + "/" + Const.scraper.endUrlAPI;
+    }
+
     init() {
         // vérifie dans la base de donnée à quelle date on c'est arrêté
         // pour changer la valeur de this.dateToGetDatas
