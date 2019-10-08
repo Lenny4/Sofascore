@@ -26,6 +26,7 @@ class Scraper {
 
     init() {
         // vérifie dans la base de donnée à quelle date on c'est arrêté
+        //on commence par this.lastDate (le début de l'année) et on remonte jusqu'à this.today
         // pour changer la valeur de this.dateToGetDatas
         //puis appelle le run()
         console.log(this.lastDate, this.today, this.dateToGetDatas);
