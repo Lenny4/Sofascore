@@ -17,10 +17,10 @@ class MySql {
 
     // https://www.w3schools.com/nodejs/nodejs_mysql.asp
     init() {
-        this.createTablesAndDatasIfDoesntExist();
+        this.createTablesIfDoesntExist();
     }
 
-    createTablesAndDatasIfDoesntExist() {
+    createTablesIfDoesntExist() {
         //compte le nombre de table dans la base de données
         const sqlNumberTable = "SELECT COUNT(*) AS nB FROM information_schema.tables WHERE table_schema = '" + this.database + "'";
         this.con.query(sqlNumberTable, (err, result) => {
@@ -38,9 +38,9 @@ class MySql {
                             if (err) throw err;
                         });
                     });
-                    console.log("Les tables et les données ont bien été crées");
+                    console.log("Les tables ont bien été crées");
                 } else {
-                    console.log("Les tables et les données sont déjà crées. Pour les mettre à jour faire un drop de toutes les tables ou un truncate de la base de donnée");
+                    console.log("Les tables sont déjà crées. Pour les mettre à jour la structure faire un drop de toutes les tables ou un truncate de la base de donnée");
                 }
             }
         });

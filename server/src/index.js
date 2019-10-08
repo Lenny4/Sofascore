@@ -6,10 +6,6 @@ const server = require('http').createServer(app);
 const io = require('../')(server);
 const port = process.env.PORT || 3000;
 
-server.listen(port, () => {
-    console.log('Server listening at port %d', port);
-});
-
 /*
  ================================
            _____  _____
@@ -25,13 +21,15 @@ const App = require('./class/App');
 const Scraper = require('./class/Scraper');
 const MySql = require('./class/MySql');
 
-const mySql = new MySql();
-mySql.init();
+server.listen(port, () => {
+    const mySql = new MySql();
+    mySql.init();
 
-const scraper = new Scraper(mySql);
+    const scraper = new Scraper(mySql);
 
-const appSofascore = new App(scraper);
-appSofascore.run();
+    const appSofascore = new App(scraper);
+    appSofascore.run();
+});
 
 
 // Routing

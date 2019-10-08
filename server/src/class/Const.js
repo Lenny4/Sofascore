@@ -10,7 +10,7 @@ const Const = {
         baseUrlAPI: "https://www.sofascore.com",
         sportsSlug: ["football, basket, tennis"],
         endUrlAPI: "json",
-        lastDate: "2019-01-01",
+        firstDate: "2019-01-01",
     },
 };
 
