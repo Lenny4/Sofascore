@@ -1,9 +1,7 @@
 // Setup basic express server
 const express = require('express');
 const app = express();
-const path = require('path');
 const server = require('http').createServer(app);
-const io = require('../')(server);
 const port = process.env.PORT || 3000;
 
 /*
@@ -21,23 +19,32 @@ const App = require('./class/App');
 const Scraper = require('./class/Scraper');
 const MySql = require('./class/MySql');
 
+const mySql = new MySql();
+const scraper = new Scraper(mySql);
+const appSofascore = new App(scraper);
+
 server.listen(port, () => {
-    const mySql = new MySql();
     mySql.init();
-
-    const scraper = new Scraper(mySql);
-
-    const appSofascore = new App(scraper);
     appSofascore.run();
 });
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded());
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
 
-// Routing
-// app.use(express.static(path.join(__dirname, 'public')));
+if (appSofascore.allMatchs === null) {
+    mySql.getAllMatchs((allMatchs) => {
+        appSofascore.allMatchs = allMatchs;
+        console.log("tous les matchs sont chargés en RAM, vous pouvez ouvrir le client.html")
+    });
+}
 
-// io.on('connection', (socket) => {
-//     // example de d'event socket
-//     socket.on('event', (data) => {
-//         console.log("data");
-//     });
-// });
+app.post('/matchs', (req, res) => {
+    res.send(appSofascore.allMatchs);
+});

@@ -23,7 +23,7 @@ class Scraper {
     }
 
     getUrlForEvent(eventId) {
-        return Const.scraper.baseUrlAPI + "/" + eventId + "/" + Const.scraper.endUrlAPI;
+        return Const.scraper.baseUrlAPI + "/event/" + eventId + "/" + Const.scraper.endUrlAPI;
     }
 
     init() {
@@ -46,10 +46,15 @@ class Scraper {
         // être sûre qu'on n'oublie aucun match lorsque l'on stop le programme
 
         this.sportsSlug.map((sportSlug) => {
+            // parfois la request ne répond pas il faut redémarrer le serveur
             request(this.getUrlForSportAndDate(sportSlug, this.dateToGetDatas), {json: true}, (err, res, body) => {
                 this.mySql.saveEventsInBdd(body, () => {
                     this.dateToGetDatas = DateManager.addDays(this.dateToGetDatas, 1);
-                    if (DateManager.isSameDate(this.dateToGetDatas, this.today) === false) this.run();
+                    if (DateManager.isLowerDate(this.dateToGetDatas, this.today) === false) {
+                        this.run();
+                    } else {
+                        console.log("pas de match supplémentaire à ajouter");
+                    }
                 });
             });
         });

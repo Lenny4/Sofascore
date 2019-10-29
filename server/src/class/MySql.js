@@ -80,6 +80,7 @@ class MySql {
                 }
             });
         });
+        if (sqls.length === 0) callback();
     }
 
     getDateToGetDatas(callback) {
@@ -89,6 +90,25 @@ class MySql {
                 callback(result[0].date);
             } else {
                 callback(null);
+            }
+        });
+
+    }
+
+    getAllMatchs(callback) {
+        //compte le nombre de table dans la base de données
+        const allMatchs = "SELECT `json` FROM `event`";
+        console.log("récupère tous les matchs ...");
+        this.con.query(allMatchs, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                let allMatchs = [];
+                console.log("parse tous les matchs ...");
+                result.map((data) => {
+                    allMatchs.push(JSON.parse(data.json));
+                });
+                callback(allMatchs);
             }
         });
 
