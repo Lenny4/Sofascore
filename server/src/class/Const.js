@@ -8,7 +8,7 @@ const Const = {
 
     scraper: {
         baseUrlAPI: "https://www.sofascore.com",
-        sportsSlug: ["football, basket, tennis"],
+        sportsSlug: ["tennis"],
         endUrlAPI: "json",
         firstDate: "2019-01-01",
     },

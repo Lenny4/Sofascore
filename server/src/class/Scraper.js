@@ -1,3 +1,5 @@
+const request = require('request');
+
 const Const = require('./Const');
 const DateManager = require('./DateManager');
 
@@ -30,6 +32,11 @@ class Scraper {
         //si aucune donnée dans la bdd alors this.dateToGetDatas = this.firstDate (le début de l'année)
         //puis appelle le run()
         console.log("Scraper.js file init() pour l'exemple", this.firstDate, this.today, this.sportsSlug, this.dateToGetDatas);
+        this.sportsSlug.map((sportSlug) => {
+            request(this.getUrlForSportAndDate(sportSlug, this.firstDate), {json: true}, (err, res, body) => {
+                this.mySql.saveEventsInBdd(body);
+            });
+        });
     }
 
     run() {
