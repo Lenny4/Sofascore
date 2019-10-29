@@ -23,7 +23,7 @@ class Scraper {
     }
 
     getUrlForEvent(eventId) {
-        return Const.scraper.baseUrlAPI + "/" + eventId + "/" + Const.scraper.endUrlAPI;
+        return Const.scraper.baseUrlAPI + "/event/" + eventId + "/" + Const.scraper.endUrlAPI;
     }
 
     init() {

@@ -41,6 +41,7 @@ app.use(express.json());
 if (appSofascore.allMatchs === null) {
     mySql.getAllMatchs((allMatchs) => {
         appSofascore.allMatchs = allMatchs;
+        console.log("tous les matchs sont chargés en RAM, vous pouvez ouvrir le client.html")
     });
 }
 
