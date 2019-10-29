@@ -31,11 +31,9 @@ class Scraper {
         // pour changer la valeur de this.dateToGetDatas
         //si aucune donnée dans la bdd alors this.dateToGetDatas = this.firstDate (le début de l'année)
         //puis appelle le run()
-        console.log("Scraper.js file init() pour l'exemple", this.firstDate, this.today, this.sportsSlug, this.dateToGetDatas);
-        this.sportsSlug.map((sportSlug) => {
-            request(this.getUrlForSportAndDate(sportSlug, this.firstDate), {json: true}, (err, res, body) => {
-                this.mySql.saveEventsInBdd(body);
-            });
+        this.mySql.getDateToGetDatas((result) => {
+            (result === null) ? this.dateToGetDatas = this.firstDate : this.dateToGetDatas = result;
+            this.run();
         });
     }
 
@@ -46,6 +44,15 @@ class Scraper {
 
         //tous les évènements pour une date donnée doivent être sauvegardé en même temps pour
         // être sûre qu'on n'oublie aucun match lorsque l'on stop le programme
+
+        this.sportsSlug.map((sportSlug) => {
+            request(this.getUrlForSportAndDate(sportSlug, this.dateToGetDatas), {json: true}, (err, res, body) => {
+                this.mySql.saveEventsInBdd(body, () => {
+                    this.dateToGetDatas = DateManager.addDays(this.dateToGetDatas, 1);
+                    if (DateManager.isSameDate(this.dateToGetDatas, this.today) === false) this.run();
+                });
+            });
+        });
     }
 }
 

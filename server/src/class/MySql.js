@@ -48,7 +48,8 @@ class MySql {
 
     }
 
-    saveEventsInBdd(response) {
+    saveEventsInBdd(response, callback) {
+        console.log("sauvgarde de ", response.sportItem.sport.name, " à la date ", response.sportItem.tournaments[0].events[0].formatedStartDate);
         //c'est fonction est à titre d'exemple
         // sinon on peut faire une fonction saveEventSInBdd qui elle prend en paramètre un tableau d'event à voir
         const sqls = [];
@@ -72,13 +73,25 @@ class MySql {
         let i = 0;
         sqls.map((sql) => {
             this.con.query(sql, (err, result) => {
-                if (err) console.log(err);
+                // if (err) console.log(err);
                 i++;
                 if (i === nbRequest) {
-                    console.log("done");
+                    callback();
                 }
             });
         });
+    }
+
+    getDateToGetDatas(callback) {
+        const sqllastDate = "SELECT `date` FROM `event` ORDER BY `date` DESC LIMIT 1;";
+        this.con.query(sqllastDate, (err, result) => {
+            if (Array.isArray(result) && result.length > 0) {
+                callback(result[0].date);
+            } else {
+                callback(null);
+            }
+        });
+
     }
 }
 

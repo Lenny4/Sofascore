@@ -23,6 +23,20 @@ const DateManager = {
     sofaScoreStringToDate: (formatedStartDate) => {
         return formatedStartDate.split('.').reverse().join('-').slice(1);
     },
+
+    addDays(date, numberOfDay) {
+        let result = new Date(date);
+        result.setDate(result.getDate() + numberOfDay);
+        return result;
+    },
+
+    isSameDate(date1, date2) {
+        return (
+            date1.getFullYear() === date2.getFullYear() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getDate() === date2.getDate()
+        );
+    },
 };
 
 module.exports = DateManager;
