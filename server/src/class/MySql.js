@@ -94,6 +94,25 @@ class MySql {
         });
 
     }
+
+    getAllMatchs(callback) {
+        //compte le nombre de table dans la base de données
+        const allMatchs = "SELECT `json` FROM `event`";
+        console.log("récupère tous les matchs ...");
+        this.con.query(allMatchs, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                let allMatchs = [];
+                console.log("parse tous les matchs ...");
+                result.map((data) => {
+                    allMatchs.push(JSON.parse(data.json));
+                });
+                callback(allMatchs);
+            }
+        });
+
+    }
 }
 
 module.exports = MySql;
