@@ -1,5 +1,6 @@
 const Const = require('./Const');
 const mysql = require('mysql');
+const DateManager = require('./DateManager');
 
 class MySql {
     constructor() {
@@ -47,9 +48,50 @@ class MySql {
 
     }
 
-    saveEventInBdd(event) {
+    saveEventsInBdd(response, callback) {
+        console.log("sauvgarde de ", response.sportItem.sport.name, " à la date ", response.sportItem.tournaments[0].events[0].formatedStartDate);
         //c'est fonction est à titre d'exemple
         // sinon on peut faire une fonction saveEventSInBdd qui elle prend en paramètre un tableau d'event à voir
+        const sqls = [];
+        // let dev = true;
+        response.sportItem.tournaments.map((tournament, index) => {
+            if (tournament.category.slug === "atp" || tournament.category.slug === "wta") {
+                tournament.events.map((event) => {
+                    if (event.status.type === "finished") {
+                        const id = event.id;
+                        const name = event.name.replace(/'/g, "\''");
+                        const sport = event.sport.slug;
+                        const date = DateManager.sofaScoreStringToDate(event.formatedStartDate);
+                        const json = JSON.stringify(event).replace(/'/g, "\''");
+                        sqls.push("INSERT INTO `event`(`id`, `name`, `sport`, `date`, `json`) VALUES (" + id + ",'" + name + "','" + sport + "','" + date + "','" + json + "');");
+                        // dev = null;
+                    }
+                });
+            }
+        });
+        const nbRequest = sqls.length;
+        let i = 0;
+        sqls.map((sql) => {
+            this.con.query(sql, (err, result) => {
+                // if (err) console.log(err);
+                i++;
+                if (i === nbRequest) {
+                    callback();
+                }
+            });
+        });
+    }
+
+    getDateToGetDatas(callback) {
+        const sqllastDate = "SELECT `date` FROM `event` ORDER BY `date` DESC LIMIT 1;";
+        this.con.query(sqllastDate, (err, result) => {
+            if (Array.isArray(result) && result.length > 0) {
+                callback(result[0].date);
+            } else {
+                callback(null);
+            }
+        });
+
     }
 }
 
