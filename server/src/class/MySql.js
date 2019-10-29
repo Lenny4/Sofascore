@@ -80,6 +80,7 @@ class MySql {
                 }
             });
         });
+        if (sqls.length === 0) callback();
     }
 
     getDateToGetDatas(callback) {
